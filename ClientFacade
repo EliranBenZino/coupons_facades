@@ -1,0 +1,17 @@
+package facades;
+
+import dao.CompanyDao;
+import dao.CouponDao;
+import dao.CustomerDao;
+import dbdao.CompanyDBDAO;
+import dbdao.CouponDBDAO;
+import dbdao.CustomerDBDAO;
+
+public abstract class ClientFacade {
+
+	CouponDao couponActions = new CouponDBDAO();
+	CustomerDao customerActions = new CustomerDBDAO();
+	CompanyDao companyActions = new CompanyDBDAO();
+
+	
+}
