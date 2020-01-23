@@ -1,0 +1,59 @@
+package facades;
+
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import beans.Company;
+import dao.CompanyDao;
+import dao.CouponDao;
+import dao.CustomerDao;
+import dbdao.CompanyDBDAO;
+import dbdao.CouponDBDAO;
+import dbdao.CustomerDBDAO;
+import exep.ExecptionCouponExists;
+
+public class AdminFacade extends ClientFacade {
+	
+	CouponDao couponActions = new CouponDBDAO();
+	CustomerDao customerActions = new CustomerDBDAO();
+	CompanyDao companyActions = new CompanyDBDAO();
+	
+	public void createNewCompany (Company company1) throws SQLException {
+		
+		try {
+			
+			Company tmpcomp = companyActions.getOneCompany(company1.getId());
+			if(tmpcomp==null) {
+				companyActions.addCompany(company1);
+			}else {
+				ArrayList<Company>companies = companyActions.getAllCompanies();
+		if (companies.equals(company1) == false) {
+			companyActions.addCompany(company1);
+		}
+				
+				
+			}
+		}catch (Exception e) {
+		
+		}
+	}
+	
+	public void deleteCompany(int id) throws SQLException {
+		
+		companyActions.deleteCompany(id);
+	}
+	
+	public void getAllCompanies () throws SQLException {
+		companyActions.getAllCompanies();
+	}
+	
+	public void isCompanyExists(String email, String password) throws SQLException {
+		companyActions.companyExists(email, password);
+	}
+
+	public void getSpecificCompanyById (int id) throws SQLException {
+		companyActions.getOneCompany(id);
+	}
+	
+}
